@@ -14,6 +14,9 @@ add_library(bolt_rt_instr STATIC
   instr.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/config.h
   )
+option(BOLT_RT_MAX_MEM "Maximum memory for runtime allocations.")
+target_compile_definitions(bolt_rt_instr PRIVATE RUNTIME_MAX_MEMORY=${BOLT_RT_MAX_MEM})
+
 add_library(bolt_rt_hugify STATIC
   hugify.cpp
   ${CMAKE_CURRENT_BINARY_DIR}/config.h

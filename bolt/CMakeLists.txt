@@ -44,6 +44,8 @@ if (LLVM_INCLUDE_TESTS)
   endif()
 endif()
 
+option(BOLT_RT_MAX_MEM "Maximum memory for runtime allocations." 0xa00000)
+
 if (BOLT_ENABLE_RUNTIME)
   message(STATUS "Building BOLT runtime libraries for X86")
   ExternalProject_Add(bolt_rt
@@ -55,7 +57,8 @@ if (BOLT_ENABLE_RUNTIME)
                -DCMAKE_BUILD_TYPE=Release
                -DCMAKE_MAKE_PROGRAM=${CMAKE_MAKE_PROGRAM}
                -DCMAKE_INSTALL_PREFIX=${LLVM_BINARY_DIR}
-    BUILD_ALWAYS True
+               -DBOLT_RT_MAX_MEM=${BOLT_RT_MAX_MEM}
+          BUILD_ALWAYS True
     )
   install(CODE "execute_process\(COMMAND \${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=\${CMAKE_INSTALL_PREFIX} -P ${CMAKE_CURRENT_BINARY_DIR}/bolt_rt-bins/cmake_install.cmake \)"
     COMPONENT bolt)

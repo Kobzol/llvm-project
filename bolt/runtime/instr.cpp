@@ -206,7 +206,7 @@ public:
 
 private:
   static constexpr uint64_t Magic = 0x1122334455667788ull;
-  uint64_t MaxSize = 0xa00000;
+  uint64_t MaxSize = RUNTIME_MAX_MEMORY;
   uint8_t *StackBase{nullptr};
   uint64_t StackSize{0};
   bool Shared{false};
